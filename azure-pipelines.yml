@@ -23,7 +23,7 @@ jobs:
     workingDirectory: 'Agora-Video-With-FaceUnity-Windows'
     scheme: 'Agora-Video-With-FaceUnity-Windows'
     sdkVersion: '3_0_0'
-	sdkFolderVersion: '3.0.0'
-	faceUnitySDKVersion: '6.6.0'
-	Machine: x86
+    sdkFolderVersion: '3.0.0'
+    faceUnitySDKVersion: '6.6.0'
+    Machine: x86
     solutionName: 'AgoraFaceUnityTutorial.sln'

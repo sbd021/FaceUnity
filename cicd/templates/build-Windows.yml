@@ -29,14 +29,14 @@ jobs:
       sdkunzipPath: 'AgoraSDK/Agora_Native_SDK_for_Windows_v${{ parameters.sdkFolderVersion }}_FULL'
     steps:
       - script: echo "${{ parameters.sdkurl }}" && ls
-	  #AgoraSDK
-	  - powershell: cicd/script/downloadsdk.ps1 "$(WindowsRTCSDK)" "AgoraSDK.zip"
-	  #faceUnitySDK
+      #AgoraSDK
+      - powershell: cicd/script/downloadsdk.ps1 "$(WindowsRTCSDK)" "AgoraSDK.zip"
+      #faceUnitySDK
       - powershell: cicd/script/downloadsdk.ps1 "$(FaceUnitySDK)" "FaceUnity.zip"
-	  #dependencies
-	  - powershell: cicd/script/downloadsdk.ps1 "$(Windows-Dependencies)" "windows-dependencies.zip"
-	 
-	  - task: ExtractFiles@1
+      #dependencies
+      - powershell: cicd/script/downloadsdk.ps1 "$(Windows-Dependencies)" "windows-dependencies.zip"
+      
+      - task: ExtractFiles@1
         inputs:
           archiveFilePatterns: 'AgoraSDK.zip' 
           destinationFolder: 'AgoraSDK'    

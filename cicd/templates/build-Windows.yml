@@ -55,7 +55,7 @@ jobs:
       - task: CopyFiles@2
         inputs:
           sourceFolder: $(sdkunzipPath)/sdk
-          targetFolder: ${{ parameters.workingDirectory }}/sdk
+          targetFolder: ${{ parameters.workingDirectory }}/AgoraSDK
 
       - task: CopyFiles@2
         inputs:
@@ -64,8 +64,8 @@ jobs:
       - script: ls
       - task: CopyFiles@2
         inputs:
-          sourceFolder: 'windows-dependencies/ThirdParty'
-          targetFolder: ${{ parameters.workingDirectory }}/ThirdParty
+          sourceFolder: 'windows-dependencies/ThridParty'
+          targetFolder: ${{ parameters.workingDirectory }}/ThridParty
       - script: ls
       - script: cd ${{ parameters.workingDirectory }} && ls
       - script: ls       

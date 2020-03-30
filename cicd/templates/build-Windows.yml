@@ -45,8 +45,8 @@ jobs:
         inputs:
           archiveFilePatterns: 'FaceUnity.zip' 
           destinationFolder: 'FaceUnity'    
-	  - script: ls
-	  - task: ExtractFiles@1
+      - script: ls
+      - task: ExtractFiles@1
         inputs:
           archiveFilePatterns: 'windows-dependencies.zip' 
           destinationFolder: 'windows-dependencies'    

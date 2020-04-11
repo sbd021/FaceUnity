@@ -44,8 +44,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\AgoraSDK\include;..\ThridParty\DirectShow\Include;..\ThridParty\GL1;..\openssl\include;..\FaceUnitySDK\include;libYUV</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);..\AgoraSDK\lib;..\ThridParty\DirectShow\Lib\X86;..\ThridParty\GL1;..\openssl\lib;..\FaceUnitySDK\Win32;libYUV\Debug</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\AgoraSDK\include;..\ThridParty\GL1;..\openssl\include;..\FaceUnitySDK\include;libYUV</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);..\AgoraSDK\lib;..\ThridParty\GL1;..\openssl\lib;..\FaceUnitySDK\Win32;libYUV\Debug</LibraryPath>
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -60,11 +60,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(WindowsSDKDir_81)include\um;$(SolutionDir)ThridParty\libYUV</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>yuv.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThridParty\libYUV\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -91,6 +93,7 @@ copy ..\FaceUnitySDK\Win32\*.dll ..\$(Configuration)\</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(WindowsSDKDir_81)include\um;$(SolutionDir)ThridParty\libYUV</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -98,6 +101,7 @@ copy ..\FaceUnitySDK\Win32\*.dll ..\$(Configuration)\</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>yuv.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThridParty\libYUV\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -132,9 +136,12 @@ copy ..\FaceUnitySDK\Win32\*.dll ..\$(Configuration)\</Command>
     <ClInclude Include="AgoraOpenGL.h" />
     <ClInclude Include="AGResourceVisitor.h" />
     <ClInclude Include="AGSliderCtrl.h" />
+    <ClInclude Include="AgVideoBuffer.h" />
     <ClInclude Include="BufferQueue.h" />
     <ClInclude Include="CameraDS.h" />
+    <ClInclude Include="capture-filter.hpp" />
     <ClInclude Include="commonfun.h" />
+    <ClInclude Include="DShowHelper.h" />
     <ClInclude Include="DynamicKey5.h" />
     <ClInclude Include="ExtendAudioFrameObserver.h" />
     <ClInclude Include="ExtendVideoFrameObserver.h" />
@@ -163,12 +170,24 @@ copy ..\FaceUnitySDK\Win32\*.dll ..\$(Configuration)\</Command>
     <ClCompile Include="AgoraOpenGL.cpp" />
     <ClCompile Include="AGResourceVisitor.cpp" />
     <ClCompile Include="AGSliderCtrl.cpp" />
+    <ClCompile Include="AgVideoBuffer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="BufferQueue.cpp" />
     <ClCompile Include="CameraDS.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="capture-filter.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="commonfun.cpp" />
+    <ClCompile Include="DShowHelper.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="ExtendAudioFrameObserver.cpp" />
     <ClCompile Include="ExtendVideoFrameObserver.cpp" />
     <ClCompile Include="FileIO.cpp" />

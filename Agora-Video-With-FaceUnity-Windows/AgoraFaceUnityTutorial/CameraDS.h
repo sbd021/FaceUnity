@@ -7,11 +7,11 @@
 
 #include <windows.h>
 #include <atlbase.h>
-#include <qedit.h>
+//#include <qedit.h>
 #include <dshow.h>
 
 #include <memory>
-
+#include "capture-filter.hpp"
 #define MYFREEMEDIATYPE(mt)	{if ((mt).cbFormat != 0)		\
 					{CoTaskMemFree((PVOID)(mt).pbFormat);	\
 					(mt).cbFormat = 0;						\
@@ -27,7 +27,7 @@
 class CCameraDS
 {
 private:
-	std::tr1::shared_ptr<unsigned char> m_frame;
+	std::shared_ptr<unsigned char> m_frame;
 
 	//IplImage * m_pFrame;
 	bool m_bConnected;	
@@ -36,27 +36,33 @@ private:
 	bool m_bLock;
 	bool m_bChanged;
 	long m_nBufferSize;
-
+    long m_nUpdateBufSize;
 	CComPtr<IGraphBuilder> m_pGraph;
 	CComPtr<IBaseFilter> m_pDeviceFilter;
 	CComPtr<IMediaControl> m_pMediaControl;
-	CComPtr<IBaseFilter> m_pSampleGrabberFilter;
-	CComPtr<ISampleGrabber> m_pSampleGrabber;
-	CComPtr<IPin> m_pGrabberInput;
-	CComPtr<IPin> m_pGrabberOutput;
+    CComPtr<CaptureFilter> m_pVideoCapture;
+    CComPtr<ICaptureGraphBuilder2>   m_ptrCaptureGraphBuilder2;
+	//CComPtr<IBaseFilter> m_pSampleGrabberFilter;
+	//CComPtr<ISampleGrabber> m_pSampleGrabber;
+	//CComPtr<IPin> m_pGrabberInput;
+	//CComPtr<IPin> m_pGrabberOutput;
+    IPin*  m_CaptureInput;
 	CComPtr<IPin> m_pCameraOutput;
 	CComPtr<IMediaEvent> m_pMediaEvent;
-	CComPtr<IBaseFilter> m_pNullFilter;
-	CComPtr<IPin> m_pNullInputPin;
+    BITMAPINFOHEADER*    bmiHeader = nullptr;
+	//CComPtr<IBaseFilter> m_pNullFilter;
+	//CComPtr<IPin> m_pNullInputPin;
 
 private:
 	bool BindFilter(int nCamIDX, IBaseFilter **pFilter);
 	void SetCrossBar();
-
+    void Receive(IMediaSample *sample);
 public:
 	CCameraDS();
 	virtual ~CCameraDS();
 
+    BOOL GetCurrentMediaType(AM_MEDIA_TYPE **lpAMMediaType);
+       
 	//打开摄像头，nCamID指定打开哪个摄像头，取值可以为0,1,2,...
 	//bDisplayProperties指示是否自动弹出摄像头属性页
 	//nWidth和nHeight设置的摄像头的宽和高，如果摄像头不支持所设定的宽度和高度，则返回false
@@ -85,9 +91,14 @@ public:
 	int GetHeight() { return m_nHeight; }
 
 	//返回图像数据为RGBA布局
-	std::tr1::shared_ptr<unsigned char> QueryFrame();
+	std::shared_ptr<unsigned char> QueryFrame();
 
 	bool m_bIsCurrentDeviceBusy;
+
+    LPBYTE		m_lpYUVBuffer = nullptr;
+    LPBYTE		m_lpY = nullptr;
+    LPBYTE		m_lpU = nullptr;
+    LPBYTE		m_lpV = nullptr;
 };
 
 #endif 

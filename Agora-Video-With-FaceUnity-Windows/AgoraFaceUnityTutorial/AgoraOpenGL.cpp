@@ -99,7 +99,7 @@ void CAgoraOpenGl::Reshap(int nWidth, int nHeight)
 	glLoadIdentity();
 }
 
-void CAgoraOpenGl::Render(std::tr1::shared_ptr<unsigned char>frame)
+void CAgoraOpenGl::Render(std::shared_ptr<unsigned char>frame)
 {
 #if 0
 	glClear(GL_COLOR_BUFFER_BIT);

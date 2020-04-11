@@ -20,7 +20,7 @@ namespace NamaExampleNameSpace
 		Nama();
 		~Nama();
 		int CameraCount();
-		std::tr1::shared_ptr<unsigned char> QueryFrame();
+		std::shared_ptr<unsigned char> QueryFrame();
 		int CameraName(int nCamID, char * sName, int nBufferSize);
 		void ReOpenCamera();
 		void Init(const int width = 1280, const int height = 720);
@@ -33,21 +33,21 @@ namespace NamaExampleNameSpace
 		void NextShape();
 		void UpdateFilter();
 		void UpdateBeauty();
-		void ScissorFrameBuffer(std::tr1::shared_ptr<unsigned char> frame);
-		std::tr1::shared_ptr<unsigned char> ConvertBetweenBGRAandRGBA(std::tr1::shared_ptr<unsigned char> frame);
-		void RenderItems(std::tr1::shared_ptr<unsigned char> frame);
+		void ScissorFrameBuffer(std::shared_ptr<unsigned char> frame);
+		std::shared_ptr<unsigned char> ConvertBetweenBGRAandRGBA(std::shared_ptr<unsigned char> frame);
+		void RenderItems(std::shared_ptr<unsigned char> frame);
 		void RenderItems(unsigned char* pCameraBuffer);
-		std::tr1::shared_ptr<unsigned char> RenderEx();	
-		void DrawLandmarks(std::tr1::shared_ptr<unsigned char> frame);
+		std::shared_ptr<unsigned char> RenderEx();	
+		void DrawLandmarks(std::shared_ptr<unsigned char> frame);
 		std::string getVersion();
 	private:
 		void CreateBundle();
 		void CreateBundle(const int idx);		
-		void DrawPoint(std::tr1::shared_ptr<unsigned char> frame, int x, int y, unsigned char r = 255, unsigned char g = 240, unsigned char b = 33);
+		void DrawPoint(std::shared_ptr<unsigned char> frame, int x, int y, unsigned char r = 255, unsigned char g = 240, unsigned char b = 33);
 
 	private:
-		static std::tr1::shared_ptr<Nama> m_pInstance;
-		std::tr1::shared_ptr<CCameraDS> m_cap;
+		static std::shared_ptr<Nama> m_pInstance;
+		std::shared_ptr<CCameraDS> m_cap;
 		int m_curBundleIdx;
 		
 		int m_face_shape;

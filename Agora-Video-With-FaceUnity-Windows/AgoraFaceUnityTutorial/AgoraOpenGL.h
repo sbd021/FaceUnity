@@ -21,7 +21,7 @@ public:
 
 	void Reshap(int nWidth,int nHeight);
 	
-	void Render(std::tr1::shared_ptr<unsigned char>frame);
+	void Render(std::shared_ptr<unsigned char>frame);
 
 private:
 	GLuint textureID = 0;

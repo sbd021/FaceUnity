@@ -52,13 +52,16 @@ END_MESSAGE_MAP()
 // CAgoraFaceUnityTutorialDlg ¶Ô»°¿ò
 
 
-
+FILE* fp = NULL;
 CAgoraFaceUnityTutorialDlg::CAgoraFaceUnityTutorialDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CAgoraFaceUnityTutorialDlg::IDD, pParent),
 	is_need_draw_landmarks(FALSE)
 	, m_bTerminated(TRUE)
 	, m_isJoinChannel(FALSE)
 {
+    
+    fopen_s(&fp,"D:\\1.yuv", "ab+");
+    
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
@@ -287,7 +290,7 @@ void CAgoraFaceUnityTutorialDlg::OnBnClickedButtonJoinchannel()
 		vc.view = m_PicCtlLocal;
 		m_lpRtcEngine->setupLocalVideo(vc);
 
-		m_lpRtcEngine->startPreview();
+		//m_lpRtcEngine->startPreview();
 
 		bool bAppCertEnalbe = str2int(gAgoraFaceUnityConfig.getAppCertEnable());
 		if (bAppCertEnalbe){
@@ -304,7 +307,7 @@ void CAgoraFaceUnityTutorialDlg::OnBnClickedButtonJoinchannel()
 
 		m_lpAgoraObject->EnableExtendVideoCapture(FALSE, NULL);
 		m_lpAgoraObject->LeaveCahnnel();
-		m_lpRtcEngine->stopPreview();
+		//m_lpRtcEngine->stopPreview();
 	}
 }
 
@@ -687,6 +690,7 @@ void CAgoraFaceUnityTutorialDlg::OnBnClickedButtonFilter5()
 
 void CAgoraFaceUnityTutorialDlg::OnClose()
 {
+    fclose(fp);
 	//TO DO
 	if (m_lpAgoraObject)
 		m_lpAgoraObject->LeaveCahnnel();
@@ -704,7 +708,7 @@ void CAgoraFaceUnityTutorialDlg::OnClose()
 void CAgoraFaceUnityTutorialDlg::OnTimer(UINT_PTR nIDEvent)
 {
 	if (nIDEvent == 1 && m_isJoinChannel){
-		std::tr1::shared_ptr<unsigned char> m_sharedCaptureFrame = m_FaceNama.QueryFrame();
+		std::shared_ptr<unsigned char> m_sharedCaptureFrame = m_FaceNama.QueryFrame();
 
 		if (m_sharedCaptureFrame){
 			
@@ -717,14 +721,16 @@ void CAgoraFaceUnityTutorialDlg::OnTimer(UINT_PTR nIDEvent)
 			unsigned char* pBuffer_dst_v = m_lpBufferYUV + m_nWidth * m_nHeight  + m_nWidth * m_nHeight /4;
 			int ndst_stride_v = m_nWidth / 2;
 
-			unsigned char* pBuffer_dst_y_rotate180 = m_lpBufferYUVRotate;
+            fwrite(src_frame, 1, m_nWidth*m_nHeight * 3 / 2, fp);
+            CVideoPackageQueue::GetInstance()->PushVideoPackage(src_frame, m_nWidth*m_nHeight * 3 / 2);
+		/*	unsigned char* pBuffer_dst_y_rotate180 = m_lpBufferYUVRotate;
 			unsigned char* pBuffer_dst_u_rotate180 = m_lpBufferYUVRotate + m_nWidth * m_nHeight;
 			unsigned char* pBuffer_dst_v_rotate180 = m_lpBufferYUVRotate + m_nWidth * m_nHeight + m_nWidth * m_nHeight / 4;
 			
 			libyuv::ARGBToI420((unsigned char*)src_frame, m_nWidth * 4, pBuffer_dst_y, ndst_stride_y, pBuffer_dst_u, ndst_stride_u, pBuffer_dst_v, ndst_stride_v, m_nWidth, m_nHeight);
 			libyuv::I420Rotate(pBuffer_dst_y, ndst_stride_y, pBuffer_dst_u, ndst_stride_u, pBuffer_dst_v, ndst_stride_v,pBuffer_dst_y_rotate180,ndst_stride_y,pBuffer_dst_u_rotate180,ndst_stride_u,pBuffer_dst_v_rotate180,ndst_stride_v,
 				m_nWidth, m_nHeight, libyuv::RotationMode::kRotate180);
-			CVideoPackageQueue::GetInstance()->PushVideoPackage(m_lpBufferYUVRotate, m_nLenYUV);
+			*/
 		}
 	}
 

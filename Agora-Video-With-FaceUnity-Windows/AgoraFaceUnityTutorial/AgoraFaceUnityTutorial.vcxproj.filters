@@ -96,9 +96,6 @@
     <ClInclude Include="utils.h">
       <Filter>Uitl</Filter>
     </ClInclude>
-    <ClInclude Include="CameraDS.h">
-      <Filter>DirectShow</Filter>
-    </ClInclude>
     <ClInclude Include="ExtendAudioFrameObserver.h">
       <Filter>AgoraObject</Filter>
     </ClInclude>
@@ -125,6 +122,18 @@
     </ClInclude>
     <ClInclude Include="VideoPackageQueue.h">
       <Filter>Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraDS.h">
+      <Filter>DirectShow</Filter>
+    </ClInclude>
+    <ClInclude Include="AgVideoBuffer.h">
+      <Filter>DirectShow</Filter>
+    </ClInclude>
+    <ClInclude Include="capture-filter.hpp">
+      <Filter>DirectShow</Filter>
+    </ClInclude>
+    <ClInclude Include="DShowHelper.h">
+      <Filter>DirectShow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -170,9 +179,6 @@
     <ClCompile Include="FileIO.cpp">
       <Filter>Uitl</Filter>
     </ClCompile>
-    <ClCompile Include="CameraDS.cpp">
-      <Filter>DirectShow</Filter>
-    </ClCompile>
     <ClCompile Include="ExtendAudioFrameObserver.cpp">
       <Filter>AgoraObject</Filter>
     </ClCompile>
@@ -199,6 +205,18 @@
     </ClCompile>
     <ClCompile Include="VideoPackageQueue.cpp">
       <Filter>Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraDS.cpp">
+      <Filter>DirectShow</Filter>
+    </ClCompile>
+    <ClCompile Include="AgVideoBuffer.cpp">
+      <Filter>DirectShow</Filter>
+    </ClCompile>
+    <ClCompile Include="capture-filter.cpp">
+      <Filter>DirectShow</Filter>
+    </ClCompile>
+    <ClCompile Include="DShowHelper.cpp">
+      <Filter>DirectShow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -352,3 +352,8 @@ ASALocalRun/
 *.exe
 *.out
 *.app
+ThridParty/
+openssl/
+FaceUnitySDK/
+SDK/
+AgoraSDK/

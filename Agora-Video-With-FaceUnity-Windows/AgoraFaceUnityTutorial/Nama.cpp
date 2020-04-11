@@ -80,7 +80,7 @@ Nama::Nama()
 	m_faceShapeLevel(0.0f)
 {
 	m_curCameraIdx = 0;
-	m_cap = std::tr1::shared_ptr<CCameraDS>(new CCameraDS);
+	m_cap = std::shared_ptr<CCameraDS>(new CCameraDS);
 }
 
 Nama::~Nama()
@@ -103,7 +103,7 @@ int Nama::CameraCount()
 	return m_cap->CameraCount();
 }
 
-std::tr1::shared_ptr<unsigned char> Nama::QueryFrame()
+std::shared_ptr<unsigned char> Nama::QueryFrame()
 {
 	return m_cap->QueryFrame();
 }
@@ -318,7 +318,7 @@ void Nama::CreateBundle(const int idx)
 	}
 }
 //裁剪图像内容
-void Nama::ScissorFrameBuffer(std::tr1::shared_ptr<unsigned char> frame)
+void Nama::ScissorFrameBuffer(std::shared_ptr<unsigned char> frame)
 {
 	int size = m_frameWidth*m_frameHeight * 4;
 	for (int i = 0; i < m_frameHeight; i++)
@@ -341,10 +341,10 @@ void Nama::ScissorFrameBuffer(std::tr1::shared_ptr<unsigned char> frame)
 	}
 }
 
-std::tr1::shared_ptr<unsigned char> Nama::ConvertBetweenBGRAandRGBA(std::tr1::shared_ptr<unsigned char> frame)
+std::shared_ptr<unsigned char> Nama::ConvertBetweenBGRAandRGBA(std::shared_ptr<unsigned char> frame)
 {
 	int size = m_frameWidth*m_frameHeight * 4;
-	auto temp_frame = std::tr1::shared_ptr<unsigned char>(new unsigned char[size]);
+	auto temp_frame = std::shared_ptr<unsigned char>(new unsigned char[size]);
 	int offset = 0;
 	if (IsBadReadPtr(frame.get(), 4))//can't debug run
 	{
@@ -370,7 +370,7 @@ std::tr1::shared_ptr<unsigned char> Nama::ConvertBetweenBGRAandRGBA(std::tr1::sh
 }
 
 //渲染函数
-void Nama::RenderItems(std::tr1::shared_ptr<unsigned char> frame)
+void Nama::RenderItems(std::shared_ptr<unsigned char> frame)
 {	
 	switch (m_mode)
 	{
@@ -379,17 +379,17 @@ void Nama::RenderItems(std::tr1::shared_ptr<unsigned char> frame)
 		{
 			int handle[2] = { m_beautyHandles, m_propHandles[m_curBundleIdx] };
 			//支持的格式有FU_FORMAT_BGRA_BUFFER 、 FU_FORMAT_NV21_BUFFER 、FU_FORMAT_I420_BUFFER 、FU_FORMAT_RGBA_BUFFER			
-			fuRenderItemsEx2(FU_FORMAT_RGBA_BUFFER, reinterpret_cast<int*>(frame.get()), FU_FORMAT_BGRA_BUFFER, reinterpret_cast<int*>(frame.get()),
+			fuRenderItemsEx2(FU_FORMAT_I420_BUFFER, reinterpret_cast<int*>(frame.get()), FU_FORMAT_I420_BUFFER, reinterpret_cast<int*>(frame.get()),
 				m_frameWidth, m_frameHeight, m_frameID, handle, 2, NAMA_RENDER_FEATURE_FULL | NAMA_RENDER_OPTION_FLIP_X, NULL);			
 		}
 		else if (1 == m_isDrawProp && 0 == m_isBeautyOn)
 		{						
-			fuRenderItemsEx2(FU_FORMAT_RGBA_BUFFER, reinterpret_cast<int*>(frame.get()), FU_FORMAT_BGRA_BUFFER, reinterpret_cast<int*>(frame.get()),
+			fuRenderItemsEx2(FU_FORMAT_I420_BUFFER, reinterpret_cast<int*>(frame.get()), FU_FORMAT_I420_BUFFER, reinterpret_cast<int*>(frame.get()),
 				m_frameWidth, m_frameHeight, m_frameID, &m_propHandles[m_curBundleIdx], 1, NAMA_RENDER_FEATURE_FULL | NAMA_RENDER_OPTION_FLIP_X, NULL);
 		}
 		else if (1 == m_isBeautyOn && 0 == m_isDrawProp)
 		{			
-			fuRenderItemsEx2(FU_FORMAT_RGBA_BUFFER, reinterpret_cast<int*>(frame.get()), FU_FORMAT_BGRA_BUFFER, reinterpret_cast<int*>(frame.get()),
+			fuRenderItemsEx2(FU_FORMAT_I420_BUFFER, reinterpret_cast<int*>(frame.get()), FU_FORMAT_I420_BUFFER, reinterpret_cast<int*>(frame.get()),
 				m_frameWidth, m_frameHeight, m_frameID, &m_beautyHandles, 1, NAMA_RENDER_FEATURE_FULL | NAMA_RENDER_OPTION_FLIP_X, NULL);
 		}		
 		break;
@@ -449,9 +449,9 @@ void Nama::RenderItems(unsigned char* pCameraBuffer)
 }
 
 //只调用nama里的美颜模块
-std::tr1::shared_ptr<unsigned char> Nama::RenderEx()
+std::shared_ptr<unsigned char> Nama::RenderEx()
 {
-	std::tr1::shared_ptr<unsigned char> frame = m_cap->QueryFrame();
+	std::shared_ptr<unsigned char> frame = m_cap->QueryFrame();
 
 	fuBeautifyImage(FU_FORMAT_BGRA_BUFFER, reinterpret_cast<int*>(frame.get()),
 		FU_FORMAT_BGRA_BUFFER, reinterpret_cast<int*>(frame.get()),
@@ -463,7 +463,7 @@ std::tr1::shared_ptr<unsigned char> Nama::RenderEx()
 }
 
 //绘制人脸特征点
-void Nama::DrawLandmarks(std::tr1::shared_ptr<unsigned char> frame)
+void Nama::DrawLandmarks(std::shared_ptr<unsigned char> frame)
 {
 	float landmarks[150];
 	float trans[3];
@@ -482,7 +482,7 @@ std::string Nama::getVersion()
 	return fuGetVersion();
 }
 
-void Nama::DrawPoint(std::tr1::shared_ptr<unsigned char> frame, int x, int y, unsigned char r, unsigned char g, unsigned char b)
+void Nama::DrawPoint(std::shared_ptr<unsigned char> frame, int x, int y, unsigned char r, unsigned char g, unsigned char b)
 {
 	const int offsetX[] = { -1, 0, 1 , -1, 0, 1 , -1, 0, 1 };
 	const int offsetY[] = { -1, -1, -1, 0, 0, 0, 1, 1, 1 };

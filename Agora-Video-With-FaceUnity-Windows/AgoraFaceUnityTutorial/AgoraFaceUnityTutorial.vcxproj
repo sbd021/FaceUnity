@@ -44,14 +44,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\AgoraSDK\include;..\ThridParty\GL1;..\openssl\include;..\FaceUnitySDK\include;libYUV</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);..\AgoraSDK\lib;..\ThridParty\GL1;..\openssl\lib;..\FaceUnitySDK\Win32;libYUV\Debug</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\AgoraSDK\include;..\ThridParty\GL1;..\openssl\include;..\FaceUnitySDK\include</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);..\AgoraSDK\lib;..\ThridParty\GL1;..\openssl\lib;..\FaceUnitySDK\Win32</LibraryPath>
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\AgoraSDK\include;..\ThridParty\DirectShow\Include;..\ThridParty\GL1;..\openssl\include;..\FaceUnitySDK\include;libYUV</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);..\AgoraSDK\lib;..\ThridParty\DirectShow\Lib\X86;..\ThridParty\GL1;..\openssl\lib;..\FaceUnitySDK\Win32;libYUV\Release</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\AgoraSDK\include;..\ThridParty\DirectShow\Include;..\ThridParty\GL1;..\openssl\include;..\FaceUnitySDK\include</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);..\AgoraSDK\lib;..\ThridParty\DirectShow\Lib\X86;..\ThridParty\GL1;..\openssl\lib;..\FaceUnitySDK\Win32</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -60,13 +60,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(WindowsSDKDir_81)include\um;$(SolutionDir)ThridParty\libYUV</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WindowsSDKDir_81)include\um;$(SolutionDir)libYUV</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>yuv.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThridParty\libYUV\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)libYUV\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -93,7 +93,7 @@ copy ..\FaceUnitySDK\Win32\*.dll ..\$(Configuration)\</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(WindowsSDKDir_81)include\um;$(SolutionDir)ThridParty\libYUV</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WindowsSDKDir_81)include\um;$(SolutionDir)libYUV</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -101,7 +101,7 @@ copy ..\FaceUnitySDK\Win32\*.dll ..\$(Configuration)\</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>yuv.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThridParty\libYUV\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)libYUV\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>

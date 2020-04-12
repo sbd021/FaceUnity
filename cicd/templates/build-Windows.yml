@@ -55,7 +55,7 @@ jobs:
 
       - task: ExtractFiles@1
         inputs:
-          archiveFilePatterns: 'LIBYUV-dependencies.zip' 
+          archiveFilePatterns: 'libyuv.zip' 
           destinationFolder: 'libyuv'    
 
       - script: ls

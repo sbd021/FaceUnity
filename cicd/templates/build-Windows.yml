@@ -26,7 +26,7 @@ jobs:
       WindowsRTCSDK: 'https://download.agora.io/sdk/release/Agora_Native_SDK_for_Windows(${{ parameters.Machine }})_v${{ parameters.sdkVersion }}_FULL.zip'
       FaceUnitySDK: 'https://github.com/AgoraIO/FaceUnityLegacy/releases/download/${{ parameters.faceUnitySDKVersion }}/FaceUnitySDK-Windows.zip'
       Windows-Dependencies: 'https://github.com/AgoraIO/FaceUnityLegacy/releases/download/${{ parameters.faceUnitySDKVersion }}/windows-depencies.zip'
-	     LIBYUV-Dependencies: 'https://github.com/sbd021/FaceUnity/releases/download/libyuv/libyuv.zip'
+      LIBYUV-Dependencies: 'https://github.com/sbd021/FaceUnity/releases/download/libyuv/libyuv.zip'
       sdkunzipPath: 'AgoraSDK/Agora_Native_SDK_for_Windows_v${{ parameters.sdkFolderVersion }}_FULL'
     steps:
       - script: echo "${{ parameters.sdkurl }}" && ls
@@ -36,7 +36,7 @@ jobs:
       - powershell: cicd/script/downloadsdk.ps1 "$(FaceUnitySDK)" "FaceUnity.zip"
       #dependencies
       - powershell: cicd/script/downloadsdk.ps1 "$(Windows-Dependencies)" "windows-dependencies.zip"
-	  - powershell: cicd/script/downloadsdk.ps1 "$(LIBYUV-Dependencies)" "libyuv.zip"
+      - powershell: cicd/script/downloadsdk.ps1 "$(LIBYUV-Dependencies)" "libyuv.zip"
       
       - task: ExtractFiles@1
         inputs:

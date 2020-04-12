@@ -53,7 +53,7 @@ jobs:
           archiveFilePatterns: 'windows-dependencies.zip' 
           destinationFolder: 'windows-dependencies'   
 
-	   - task: ExtractFiles@1
+      - task: ExtractFiles@1
         inputs:
           archiveFilePatterns: 'LIBYUV-dependencies.zip' 
           destinationFolder: 'libyuv'    
@@ -77,7 +77,7 @@ jobs:
           targetFolder: ${{ parameters.workingDirectory }}/ThridParty
       - script: ls
 
-	  - task: CopyFiles@2
+      - task: CopyFiles@2
         inputs:
           sourceFolder: libyuv'
           targetFolder: ${{ parameters.workingDirectory }}/

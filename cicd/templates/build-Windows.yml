@@ -79,8 +79,8 @@ jobs:
 
       - task: CopyFiles@2
         inputs:
-          sourceFolder: libyuv'
-          targetFolder: ${{ parameters.workingDirectory }}/libyuv
+          sourceFolder: libyuv/'
+          targetFolder: ${{ parameters.workingDirectory }}/
       - script: ls
 
       - script: cd ${{ parameters.workingDirectory }} && ls
